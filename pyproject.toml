@@ -6,6 +6,7 @@ authors = ["vcokltfre <vcokltfre@gmail.com>"]
 license = "MIT"
 repository = "https://github.com/vcokltfre/yamlimg"
 keywords = ["yaml", "image", "storage"]
+readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.8"
