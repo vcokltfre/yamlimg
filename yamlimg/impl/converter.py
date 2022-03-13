@@ -15,9 +15,21 @@ def image_to_yaml(img: Image.Image) -> str:
         for y in range(img.height):
             pixel: tuple[int, int, int, int] = img.getpixel((x, y))  # type: ignore
             pixels.append(
-                "- x: {x}\n  y: {y}\n  r: {r}\n  g: {g}\n  b: {b}\n  a: {a}\n".format(
-                    x=x, y=y, r=pixel[0], g=pixel[1], b=pixel[2], a=(pixel[3] if len(pixel) == 4 else 255)
+                "\n".join(
+                    [
+                        p
+                        for p in [
+                            f"- x: {x}",
+                            f"  y: {y}",
+                            f"  r: {pixel[0]}" if pixel[0] != 0 else "",
+                            f"  g: {pixel[1]}" if pixel[1] != 0 else "",
+                            f"  b: {pixel[2]}" if pixel[2] != 0 else "",
+                            f"  a: {pixel[3]}" if len(pixel) == 4 and pixel[3] != 0 else "",
+                        ]
+                        if p
+                    ]
                 )
+                + "\n"
             )
 
     data += "".join(pixels)
